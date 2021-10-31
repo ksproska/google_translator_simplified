@@ -1,7 +1,7 @@
 import json
 import unittest
-from translator_complex import GoogleTranslator
-import translator_constant as t_const
+from .translator_complex import GoogleTranslator
+from . import translator_constant as t_const
 
 
 class Translator:
