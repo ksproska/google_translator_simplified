@@ -10,7 +10,7 @@ from urllib.parse import quote
 
 import urllib3
 
-from translator_constant import LANGUAGES, DEFAULT_SERVICE_URLS
+from .translator_constant import LANGUAGES, DEFAULT_SERVICE_URLS
 
 log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
