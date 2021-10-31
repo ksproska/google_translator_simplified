@@ -1,15 +1,15 @@
 import json
 import unittest
-import googletrans
-from google_trans_new import google_translator
+from translator_complex import GoogleTranslator
+import translator_constant as t_const
 
 
 class Translator:
     """"
         Class for translating texts and detecting language (based on Google Translator).
     """
-    TRANSLATOR = google_translator()
-    DICTIONARY_ABBREVIATION = googletrans.LANGUAGES
+    TRANSLATOR = GoogleTranslator()
+    DICTIONARY_ABBREVIATION = t_const.LANGUAGES
     DICTIONARY_NAMES = {v: k for k, v in DICTIONARY_ABBREVIATION.items()}
     MAX_DETECT_TEXT_LEN = 500  # necessary because for longer texts it throws exception
 
