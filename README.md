@@ -1,48 +1,70 @@
 Class for translating texts and detecting language (based on Google Translator).
 
+Get text translation:
 ```python
 from google_translator_simplified import Translator
-def test_get_translation(self):
-    self.assertEqual(Translator.get_translation('pl', 'text for translation', 'en'), 'Tekst do tłumaczenia ')
-    self.assertEqual(Translator.get_translation('de', 'tekst do przetłumaczenia', 'pl'), 'Text für die Übersetzung ')
-    self.assertEqual(Translator.get_translation('pl', 'text for translation'), 'Tekst do tłumaczenia ')
-    self.assertEqual(Translator.get_translation('de', 'tekst do przetłumaczenia'), 'Text für die Übersetzung ')
 
-def test_detect_lang(self):
-    self.assertEqual(Translator.detect_lang('text for translation'), 'en')
-    self.assertEqual(Translator.detect_lang('Mittwoch'), 'de')
-    self.assertEqual(Translator.detect_lang('inny przykład'), 'pl')
+Translator.get_translation('pl', 'text for translation', 'en') #'Tekst do tłumaczenia '
+Translator.get_translation('de', 'tekst do przetłumaczenia', 'pl') #'Text für die Übersetzung '
+Translator.get_translation('pl', 'text for translation') #'Tekst do tłumaczenia '
+Translator.get_translation('de', 'tekst do przetłumaczenia') #'Text für die Übersetzung '
+```
+Detect language:
+```python
+from google_translator_simplified import Translator
 
-def test_get_abbreviation(self):
-    self.assertEqual(Translator.get_abbreviation('english'), 'en')
-    self.assertEqual(Translator.get_abbreviation('polish'), 'pl')
-    self.assertEqual(Translator.get_abbreviation('german'), 'de')
+Translator.detect_lang('text for translation') #'en'
+Translator.detect_lang('Mittwoch') #'de'
+Translator.detect_lang('inny przykład') #'pl'
+```
+Get language abbreviation:
+```python
+from google_translator_simplified import Translator
 
-def test_get_name(self):
-    self.assertEqual(Translator.get_name('en'), 'english')
-    self.assertEqual(Translator.get_name('pl'), 'polish')
-    self.assertEqual(Translator.get_name('de'), 'german')
+Translator.get_abbreviation('english') #'en'
+Translator.get_abbreviation('polish') #'pl'
+Translator.get_abbreviation('german') #'de'
+```
+Get language full name:
+```python
+from google_translator_simplified import Translator
 
-def test_names_list(self):
-    self.assertEqual(Translator.names_list[:7], ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque'])
-    self.assertEqual('english' in Translator.names_list, True)
-    self.assertEqual('german' in Translator.names_list, True)
-    self.assertEqual('polish' in Translator.names_list, True)
+Translator.get_name('en') #'english'
+Translator.get_name('pl') #'polish'
+Translator.get_name('de') #'german'
+```
+names list:
+```python
+from google_translator_simplified import Translator
 
-def test_abbreviation_list(self):
-    self.assertEqual(Translator.abbreviation_list[:7], ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu'])
-    self.assertEqual('en' in Translator.abbreviation_list, True)
-    self.assertEqual('de' in Translator.abbreviation_list, True)
-    self.assertEqual('pl' in Translator.abbreviation_list, True)
+Translator.names_list[:7] #['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque'])
+```
+abbreviation list:
+```python
+from google_translator_simplified import Translator
 
-def test_untranslatableError(self):
-    self.assertRaises(Translator.TranslatorUntranslatableError, Translator.detect_lang, '')
-    self.assertRaises(Translator.TranslatorUntranslatableError, Translator.detect_lang, '``2564&&')
-    self.assertRaises(Translator.TranslatorUntranslatableError, Translator.detect_lang, '   ')
-    self.assertRaises(Translator.TranslatorUntranslatableError, Translator.detect_lang, ' \t\n')
-
-def test_IncorrectAbbreviation(self):
-    self.assertRaises(Translator.TranslatorIncorrectAbbreviation, Translator.get_translation, '', 'text for translation')
-    self.assertRaises(Translator.TranslatorIncorrectAbbreviation, Translator.get_translation, 'd', 'text for translation')
-    self.assertRaises(Translator.TranslatorIncorrectAbbreviation, Translator.get_translation, 'de', 'text for translation', 'e')
+Translator.abbreviation_list[:7] #['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu']
+```
+Errors:
+```python
+from google_translator_simplified import Translator
+import unittest
+class TestTranslator(unittest.TestCase):
+    def test_untranslatableError(self):
+        self.assertRaises(Translator.TranslatorUntranslatableError, 
+                          Translator.detect_lang, '')
+        self.assertRaises(Translator.TranslatorUntranslatableError, 
+                          Translator.detect_lang, '``2564&&')
+        self.assertRaises(Translator.TranslatorUntranslatableError, 
+                          Translator.detect_lang, '   ')
+        self.assertRaises(Translator.TranslatorUntranslatableError, 
+                          Translator.detect_lang, ' \t\n')
+    
+    def test_IncorrectAbbreviation(self):
+        self.assertRaises(Translator.TranslatorIncorrectAbbreviation, 
+                          Translator.get_translation, '', 'text for translation')
+        self.assertRaises(Translator.TranslatorIncorrectAbbreviation, 
+                          Translator.get_translation, 'd', 'text for translation')
+        self.assertRaises(Translator.TranslatorIncorrectAbbreviation, 
+                          Translator.get_translation, 'de', 'text for translation', 'e')
 ```
